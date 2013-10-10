@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TodoAppRails</title>
+  <title>Scott's Sweet TODO App on Rails!</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="container">
+		<h1>Scott's Sweet TODO App on Rails!</h1>
 
-<%= yield %>
-
+		<%= yield %>
+	
+	</div>
 </body>
 </html>

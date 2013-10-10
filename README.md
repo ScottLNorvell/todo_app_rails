@@ -1,0 +1,3 @@
+# This is a Todo App in Rails with JS!
+
+### Lucky you...
