@@ -4,12 +4,14 @@
 	<hr>
 	<p>Unfinished</p>
 	<ol id="todo-items">
+		<%= render partial: 'todo_item', collection: @unfinished_tasks %>
 	</ol>
 </div>
 <div id="finished">
 	<hr>
 	<p>Finished</p>
 	<ol id="completed-items">
-		
+		<%= render partial: 'todo_item', collection: @finished_tasks %>
 	</ol>
 </div>
+

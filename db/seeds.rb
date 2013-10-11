@@ -5,3 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+TodoItem.delete_all
+
+time = Time.now
+
+(1..5).each do |i|
+	TodoItem.create task: "test task #{i}", due_date: 10.minutes.since(time)
+end
+
+(1..5).each do |i|
+	TodoItem.create task: "completed task #{i}", due_date: 10.minutes.ago, completed: time
+end
