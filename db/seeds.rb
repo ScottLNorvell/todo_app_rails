@@ -16,5 +16,5 @@ time = Time.now
 end
 
 (1..5).each do |i|
-	TodoItem.create task: "completed task #{i}", due_date: 10.minutes.ago, completed: time
+	TodoItem.create task: "completed task #{i}", due_date: 10.minutes.ago, complete: true
 end

@@ -1,9 +1,9 @@
 
 <li class="items" id="item-<%= todo_item.id %>" >
 	<span class="task-text"><%= todo_item.task %></span>
-<% if todo_item.completed.present? %>
+<% if todo_item.complete %>
 
-	<span class="meta-data"> completed at <%= todo_item.completed.strftime('%D %r') %> </span>
+	<span class="meta-data"> completed at <%= todo_item.updated_at.strftime('%D %r') %> </span>
 
 <% else %>
 
@@ -13,7 +13,7 @@
 
 	<span class="actions">
 		<!-- <span class="due-timer">due in 26 seconds</span> -->
-		<% unless todo_item.completed.present? %>
+		<% unless todo_item.complete %>
 		<button class="complete" id="complete-<%= todo_item.id %>" >Complete</button>
 		<% end %>
 		<button class="delete" id="delete-<%= todo_item.id %>" >Delete</button>
