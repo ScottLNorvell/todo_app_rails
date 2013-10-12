@@ -29,7 +29,7 @@ function renderAndAppendTask(task) {
 			completeTask(task.id);
 		});
 
-		due_timer = $('<span>').addClass('due-timer').attr('id', 'due-' + task.id).text('due at a certain time');
+		due_timer = $('<span>').addClass('due-timer').attr('id', 'due-' + task.id);
 		
 		due_timer.data({due_date: task.due_date});
 		window.timer[task.id] = setInterval(function() { updateTimer(task.id); }, 1000);
@@ -160,8 +160,6 @@ $(function() {
 		});
 	});
 	
-
-
 	add_item.on('click', function(e) {
 		// insert into db, get insert into dom
 		newTask();
@@ -173,23 +171,6 @@ $(function() {
 			newTask();
 		}
 	});
-
-
-
-	// $('.complete').on('click', function() {
-	// 	var id = $(this).attr('id').replace('complete-', '')
-		
-	// 	completeTask(id)
-	// });
-
-	// $('.delete').on('click', function() {
-	// 	var id = $(this).attr('id').replace('delete-', '')
-
-	// 	deleteTask(id)
-	// });
-
-
-
 });
 
 
