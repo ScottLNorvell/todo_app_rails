@@ -1,4 +1,5 @@
 var test_task, complete_task, test_el;
+window.timer = {}
 
 function renderAndAppendTask(task) {
 	// format the d
@@ -29,6 +30,10 @@ function renderAndAppendTask(task) {
 		});
 
 		due_timer = $('<span>').addClass('due-timer').attr('id', 'due-' + task.id).text('due at a certain time');
+		
+		due_timer.data({due_date: task.due_date});
+		window.timer[task.id] = setInterval(function() { updateTimer(task.id); }, 1000);
+		
 		actions.append(due_timer)
 		actions.append(complete_button)
 	}
@@ -57,6 +62,7 @@ function newTask() {
 		url: "/create_item",
 		data: params,
 		success: function(data){
+			console.log(data.id);
 			test_task = data;
 			renderAndAppendTask(data);
 		}
@@ -70,6 +76,7 @@ function completeTask(id) {
 		success: function(data){
 			var task = $('#item-' + id);
 			//console.log(task);
+			stopTimer(id);
 			task.remove();
 			// complete_task = data;
 			renderAndAppendTask(data);
@@ -88,6 +95,47 @@ function deleteTask(id) {
 			task.remove();
 		}
 	});
+}
+
+function updateTimer(id) {
+	var task_li = $("#item-" + id);
+	var warn_times = [295,290,285];
+	var due_timer = $('#due-' + id);
+	var now = new Date();
+	var due_time = new Date(due_timer.data().due_date);
+	var due_seconds = Math.round((due_time - now)/1000)
+	due_timer.text("due in " + due_seconds + " seconds")
+
+
+	if (due_seconds > warn_times[0]) {
+		task_li.css({
+			backgroundColor: 'rgba(0, 255, 0, 0.2)',
+			border: '2px solid rgba(0, 255, 0, 0.3)'
+		});
+	} else if (due_seconds > warn_times[1]) {
+		task_li.css({
+
+			backgroundColor: 'rgba(255, 255, 0, 0.2)',
+			border: '2px solid rgba(255, 255, 0, 0.3)'
+		});
+	} else if (due_seconds > warn_times[2]) {
+		task_li.css({
+			backgroundColor: 'rgba(255, 165, 0, 0.2)',
+			border: '2px dotted rgba(255, 165, 0, 0.3)'
+		});
+	} else {
+		task_li.css({
+			backgroundColor: 'rgba(255, 0, 0, 0.2)',
+			border: '2px dashed rgba(255, 0, 0, 0.3)'
+		});
+	}
+
+}
+
+function stopTimer(id) {
+	// var due_timer = $('#due-' + id);
+	clearInterval(window.timer[id]);
+	// due_timer.remove();
 }
 
 var first_item;
