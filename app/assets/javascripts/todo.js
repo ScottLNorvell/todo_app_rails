@@ -91,7 +91,7 @@ function deleteTask(id) {
 		success: function(data){
 			var task = $('#item-' + id);
 			//console.log(task);
-
+			stopTimer(id);
 			task.remove();
 		}
 	});
